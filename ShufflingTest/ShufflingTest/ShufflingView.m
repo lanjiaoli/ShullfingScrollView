@@ -17,6 +17,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setupUI];
+        num = 0;
     }
     return self;
 }
@@ -38,8 +39,11 @@
     
     self.pageControl = [[UIPageControl alloc]init];
     self.pageControl.frame = CGRectMake(0, kScrollViewH - 30, kScreenWidth, 30);
-    
     [self addSubview:self.pageControl];
+   NSTimer *timer  = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(timerMethed) userInfo:nil repeats:YES];
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    
 }
 
 
@@ -100,5 +104,21 @@
     _pageControl.numberOfPages = array.count;
 
     [self.collectionView reloadData];
+}
+
+#pragma mark timerMethed
+- (void)timerMethed
+{
+    num++;
+
+    if (num > numArray.count-1) {
+        num = 0;
+        _pageControl.currentPage = num;
+            self.collectionView.contentOffset = CGPointMake((kScreenWidth - 20) *num, 0);
+
+    }else{
+        _pageControl.currentPage = num;
+            self.collectionView.contentOffset = CGPointMake((kScreenWidth - 20) *num, 0);
+    }
 }
 @end

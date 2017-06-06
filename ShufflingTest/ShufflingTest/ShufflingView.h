@@ -17,6 +17,7 @@
 @interface ShufflingView : UIView<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
 {
     NSArray *numArray;
+    NSInteger num ;
 }
 
 @property (nonatomic, strong) UIPageControl *pageControl;
